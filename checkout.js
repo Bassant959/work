@@ -46,7 +46,7 @@
     })
     .then(() => {
       // تجهيز رسالة الواتساب التلقائية
-      const whatsappNumber = "201234567890"; // *** حط رقم واتساب البراند بتاعك هنا ***
+      const whatsappNumber = "201208962542"; // *** حط رقم واتساب البراند بتاعك هنا ***
       const message = `طلب جديد لابتوب براند 🎒\n\nرقم الطلب: ${orderId}\nالمنتج: ${product}\nالسعر: ${price} EGP\nالاسم: ${name}\nالموبايل 1: ${phone1}\nالموبايل 2: ${phone2 || 'لا يوجد'}\nالعنوان: ${address}`;
       
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
