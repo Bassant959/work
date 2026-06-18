@@ -1,18 +1,16 @@
 (function () {
 
-  // 🚨 GLOBAL LOCK (مش بيتكرر حتى لو الكود اتنادى مرتين)
-  if (window.__orderLocked) return;
-  window.__orderLocked = false;
+  let locked = false;
 
   window.sendOrder = function () {
 
-    // 🚫 منع أي تكرار نهائي
-    if (window.__orderLocked) return;
-    window.__orderLocked = true;
+    // 🚫 منع تكرار نهائي
+    if (locked) return;
+    locked = true;
 
     const btn = document.getElementById("confirmBtn");
 
-    // 🔒 قفل فوري جدًا
+    // 🔒 قفل فوري
     btn.disabled = true;
     btn.innerText = "Sending...";
     btn.style.pointerEvents = "none";
@@ -27,6 +25,7 @@
 
     fetch("YOUR_GOOGLE_SCRIPT_URL", {
       method: "POST",
+      keepalive: true, // 🔥 مهم جدًا لمنع الإلغاء عند التنقل
       body: JSON.stringify({
         name,
         phone1,
@@ -34,22 +33,21 @@
         address,
         product,
         price,
-        orderId: Date.now() // مهم جدًا
+        orderId: crypto.randomUUID()
       }),
       headers: {
         "Content-Type": "application/json"
       }
     })
-    .then(res => res.text())
-    .then(data => {
-
-      window.location.href = "success.html";
+    .then(() => {
+      // ⛔ تأخير بسيط جدًا لضمان الإرسال
+      setTimeout(() => {
+        window.location.replace("success.html");
+      }, 200);
     })
-    .catch(err => {
+    .catch(() => {
 
-      // لو فشل نفتح القفل تاني
-      window.__orderLocked = false;
-
+      locked = false;
       btn.disabled = false;
       btn.innerText = "Confirm Order";
       btn.style.pointerEvents = "auto";
