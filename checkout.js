@@ -21,18 +21,18 @@
     const product = localStorage.getItem("product");
     const price = localStorage.getItem("price");
 
-    fetch("https://script.google.com/macros/s/AKfycbxhQqGFF0q4HdrgvFhwyeehQDW3obfSrRQuvAOMvlObV4h51RDt5ERwQtNFME5kzj3Q/exec", {
-      method: "POST",
-      keepalive: true,
-      body: JSON.stringify({
-        name,
-        phone1,
-        phone2,
-        address,
-        product,
-        price,
-        orderId: crypto.randomUUID()
-      }),
+   fetch("https://script.google.com/macros/s/AKfycbxhQqGFF0q4HdrgvFhwyeehQDW3obfSrRQuvAOMvlObV4h51RDt5ERwQtNFME5kzj3Q/exec", {
+  method: "POST",
+  body: new URLSearchParams({
+    name,
+    phone1,
+    phone2,
+    address,
+    product,
+    price,
+    orderId: crypto.randomUUID()
+  })
+}),
       headers: {
         "Content-Type": "application/json"
       }
