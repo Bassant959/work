@@ -4,13 +4,11 @@
 
   window.sendOrder = function () {
 
-    // 🚫 منع تكرار نهائي
     if (locked) return;
     locked = true;
 
     const btn = document.getElementById("confirmBtn");
 
-    // 🔒 قفل فوري
     btn.disabled = true;
     btn.innerText = "Sending...";
     btn.style.pointerEvents = "none";
@@ -23,9 +21,9 @@
     const product = localStorage.getItem("product");
     const price = localStorage.getItem("price");
 
-    fetch("YOUR_GOOGLE_SCRIPT_URL", {
+    fetch("https://script.google.com/macros/s/AKfycbxhQqGFF0q4HdrgvFhwyeehQDW3obfSrRQuvAOMvlObV4h51RDt5ERwQtNFME5kzj3Q/exec", {
       method: "POST",
-      keepalive: true, // 🔥 مهم جدًا لمنع الإلغاء عند التنقل
+      keepalive: true,
       body: JSON.stringify({
         name,
         phone1,
@@ -40,7 +38,6 @@
       }
     })
     .then(() => {
-      // ⛔ تأخير بسيط جدًا لضمان الإرسال
       setTimeout(() => {
         window.location.replace("success.html");
       }, 200);
