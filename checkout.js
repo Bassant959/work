@@ -21,7 +21,7 @@
     const product = localStorage.getItem("product");
     const price = localStorage.getItem("price");
 
-   fetch("https://script.google.com/macros/s/AKfycbxhQqGFF0q4HdrgvFhwyeehQDW3obfSrRQuvAOMvlObV4h51RDt5ERwQtNFME5kzj3Q/exec", {
+   fetch("https://script.google.com/macros/s/AKfycbzo0CrGXoa2qJQcbVIU5EdFjNCSfrvo95yxHdKi5054_Qd8Js3fZEGS8idRqtBaTB8/exec", {
   method: "POST",
   body: new URLSearchParams({
     name,
