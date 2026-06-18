@@ -9,55 +9,55 @@ const products = [
     {
     name:"Laptop Bag 1",
     price:650,
-    image:"images/Laptop_Bag_1.jpeg"
+    image:"Laptop_Bag_1.jpeg"
     },
     
     {
     name:"Laptop Bag 2",
     price:650,
-    image:"images/Laptop_Bag_2.jpeg"
+    image:"Laptop_Bag_2.jpeg"
     },
     
     {
     name:"Laptop Bag 3",
     price:750,
-    image:"images/Laptop_Bag_3.jpeg"
+    image:"Laptop_Bag_3.jpeg"
     },
     
     {
     name:"Laptop Bag 4",
     price:700,
-    image:"images/Laptop_Bag_4.jpeg"
+    image:"Laptop_Bag_4.jpeg"
     },
     
     {
     name:"Laptop Bag 5",
     price:600,
-    image:"images/Laptop_Bag_5.jpeg"
+    image:"Laptop_Bag_5.jpeg"
     },
     
     {
     name:"Laptop Bag 6",
     price:600,
-    image:"images/Laptop_Bag_6.jpeg"
+    image:"Laptop_Bag_6.jpeg"
     },
     
     {
     name:"Laptop Bag 7",
     price:650,
-    image:"images/Laptop_Bag_7.jpeg"
+    image:"Laptop_Bag_7.jpeg"
     },
     
     {
     name:"Laptop Bag 8",
     price:750,
-    image:"images/Laptop_Bag_8.jpeg"
+    image:"Laptop_Bag_8.jpeg"
     },
     
     {
     name:"Laptop Bag 9",
     price:600,
-    image:"images/Laptop_Bag_9.jpeg"
+    image:"Laptop_Bag_9.jpeg"
     }
     
     ];
