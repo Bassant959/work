@@ -3,7 +3,7 @@ const products = [
     {
     name:"Laptop Bag",
     price:650,
-    image:"images/Laptop_Bag.jpeg"
+    image:"Laptop_Bag.jpeg"
     },
     
     {
