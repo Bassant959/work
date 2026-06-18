@@ -1,63 +1,53 @@
-const product = localStorage.getItem("product");
-const price = localStorage.getItem("price");
+let orderSent = false;
 
-function sendOrder(){
+function sendOrder() {
+  // 🚫 يمنع أي تكرار نهائي
+  if (orderSent) return;
+  orderSent = true;
 
-let name=document.getElementById("name").value;
-let phone1=document.getElementById("phone1").value;
-let phone2=document.getElementById("phone2").value;
-let address=document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone1 = document.getElementById("phone1").value.trim();
+  const phone2 = document.getElementById("phone2").value.trim();
+  const address = document.getElementById("address").value.trim();
 
-if(!name || !phone1 || !address){
+  const product = localStorage.getItem("product");
+  const price = localStorage.getItem("price");
 
-alert("Please fill all required fields");
+  const btn = document.getElementById("confirmBtn");
 
-return;
+  // 🔒 قفل الزر فورًا
+  btn.disabled = true;
+  btn.innerText = "Sending...";
 
-}
+  fetch("YOUR_GOOGLE_SCRIPT_URL", {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      phone1,
+      phone2,
+      address,
+      product,
+      price
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.text())
+  .then(data => {
+    console.log("Order sent:", data);
 
-const message = `🛍️ New Order
+    // تأكيد منع التكرار
+    orderSent = true;
 
-Product: ${product}
+    window.location.href = "success.html";
+  })
+  .catch(err => {
+    console.error(err);
 
-Price: ${price} EGP
-
-Name: ${name}
-
-Phone 1: ${phone1}
-
-Phone 2: ${phone2}
-
-Address: ${address}`;
-
-fetch(
-"https://script.google.com/macros/s/AKfycby2ZVW4WRYKL_Fqq2pjcELZfZ9OSRLHBvQtoIChPpdA6wRfSteh8s5JxhPWXiZlXLFR/exec",
-{
-method:"POST",
-body:JSON.stringify({
-product,
-price,
-name,
-phone1,
-phone2,
-address
-})
-}
-)
-.then(()=>{
-
-window.open(
-`https://wa.me/201270584171?text=${encodeURIComponent(message)}`,
-"_blank"
-);
-
-})
-.catch(err=>{
-
-console.log(err);
-
-alert("Error sending order");
-
-});
-
+    // لو فشل نفتح المحاولة تاني
+    orderSent = false;
+    btn.disabled = false;
+    btn.innerText = "Confirm Order";
+  });
 }
