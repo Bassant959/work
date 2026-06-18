@@ -5,30 +5,32 @@ body{
     justify-content:center;
     align-items:center;
     height:100vh;
-    }
+    margin: 0;
+}
     
-    .form{
+.form{
     background:white;
     padding:30px;
     width:400px;
     border-radius:15px;
     box-shadow:0 0 15px rgba(0,0,0,.1);
-    }
+}
     
-    .form h2{
+.form h2{
     text-align:center;
     margin-bottom:20px;
-    }
+}
     
-    input{
+input{
     width:100%;
     padding:12px;
     margin-bottom:15px;
     border:1px solid #ddd;
     border-radius:8px;
-    }
+    box-sizing: border-box;
+}
     
-    button{
+button{
     width:100%;
     padding:12px;
     background:#25D366;
@@ -37,4 +39,9 @@ body{
     font-size:18px;
     border-radius:8px;
     cursor:pointer;
-    }
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #1ebd58;
+}
