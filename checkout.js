@@ -1,9 +1,16 @@
 let orderSent = false;
 
 function sendOrder() {
-  // 🚫 يمنع أي تكرار نهائي
+  // 🚫 منع أي تنفيذ مهما حصل
   if (orderSent) return;
   orderSent = true;
+
+  const btn = document.getElementById("confirmBtn");
+
+  // 🔒 قفل فوري + منع أي ضغط
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+  btn.style.pointerEvents = "none";
 
   const name = document.getElementById("name").value.trim();
   const phone1 = document.getElementById("phone1").value.trim();
@@ -12,12 +19,6 @@ function sendOrder() {
 
   const product = localStorage.getItem("product");
   const price = localStorage.getItem("price");
-
-  const btn = document.getElementById("confirmBtn");
-
-  // 🔒 قفل الزر فورًا
-  btn.disabled = true;
-  btn.innerText = "Sending...";
 
   fetch("YOUR_GOOGLE_SCRIPT_URL", {
     method: "POST",
@@ -37,17 +38,19 @@ function sendOrder() {
   .then(data => {
     console.log("Order sent:", data);
 
-    // تأكيد منع التكرار
+    // تثبيت الحالة
     orderSent = true;
 
+    // انتقال مباشر
     window.location.href = "success.html";
   })
   .catch(err => {
     console.error(err);
 
-    // لو فشل نفتح المحاولة تاني
+    // لو فشل نرجع نفتح كل حاجة
     orderSent = false;
     btn.disabled = false;
+    btn.style.pointerEvents = "auto";
     btn.innerText = "Confirm Order";
   });
 }
